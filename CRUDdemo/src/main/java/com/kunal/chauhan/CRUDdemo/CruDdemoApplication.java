@@ -25,8 +25,45 @@ public class CruDdemoApplication {
 //			createStudent(studentDAO);
 //			readStudent(studentDAO);
 //			getAllStudentData(studentDAO);
-			findStudentByName(studentDAO);
+//			findStudentByName(studentDAO);
+//			UpdateStudent(studentDAO);
+//			DeleteStudent(studentDAO);
+			deleteALlStudents(studentDAO);
 		};
+	}
+
+
+	public void deleteALlStudents(StudentDAO studentDAO){
+		studentDAO.DeleteAllStudents();
+	}
+
+
+	public void DeleteStudent(StudentDAO studentDAO){
+		int id = 3;
+		System.out.println("Deleting the student with id " + id);
+		studentDAO.deleteStudent(id);
+		System.out.println("Deleted the student with id " + id);
+	}
+
+	private void UpdateStudent(StudentDAO studentDAO) {
+
+		// get student object on id
+
+		int id = 2;
+		Student theStudent = studentDAO.findById(id);
+
+
+		// change name to new name
+
+		String newName = "Babu Bhaiya";
+		theStudent.setFirstName(newName);
+
+		// save the changes / object
+
+		studentDAO.updateStudent(theStudent);
+
+		System.out.println("Changed the name of the student");
+
 	}
 
 	private void findStudentByName(StudentDAO studentDAO) {
@@ -69,7 +106,7 @@ public class CruDdemoApplication {
 		// create a student object
 
 		System.out.println("Creating a student Object");
-		Student tempStudent = new Student("Kunal", "Chauhan" , "kunalchauhanlion@gmail.com");
+		Student tempStudent = new Student("A", "B" , "AB@gmail.com");
 
 		// save the student object
 
