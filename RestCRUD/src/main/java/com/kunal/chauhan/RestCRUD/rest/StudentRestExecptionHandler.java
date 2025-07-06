@@ -7,7 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-@ControllerAdvice // Handles all of the exceptions that This app raises in one place all the exception goes here global exception handler
+@ControllerAdvice // Handles all the exceptions that This app raises in one place all the exception goes here global exception handler
+
 public class StudentRestExecptionHandler {
     @ExceptionHandler // handles StudentNotFoundException
     public ResponseEntity<StudentErrorResponse> handleStudentNotFoundException(StudentNotFoundExecption e){
