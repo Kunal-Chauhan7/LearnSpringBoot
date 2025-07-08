@@ -46,4 +46,25 @@ public class EmployeeDAOImplJPA implements EmployeeDAO{
         Employee employee = entityManager.find(Employee.class,id);
         return employee;
     }
+
+    @Override
+    public Employee SaveEmployee(Employee theEmployee) {
+
+        Employee newEmployee = entityManager.merge(theEmployee); // Add a new employee / save a new employee
+
+        return newEmployee; // return the new employee that has been created
+    }
+
+    @Override
+    public void deleteEmployee(int id) {
+
+
+//        Employee theEmployee = entityManager.find(Employee.class,id); similar to the above-mentioned method so i wil call that one
+
+        Employee theEmployee = getEmployee(id); // find the employee by using the id
+
+        entityManager.remove(theEmployee); // Delete the employee that has been found
+
+
+    }
 }

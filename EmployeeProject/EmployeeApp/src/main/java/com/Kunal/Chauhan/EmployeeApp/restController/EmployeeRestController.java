@@ -1,12 +1,10 @@
 package com.Kunal.Chauhan.EmployeeApp.restController;
 
+import com.Kunal.Chauhan.EmployeeApp.Execption.EmployeeNotExecption;
 import com.Kunal.Chauhan.EmployeeApp.entity.Employee;
 import com.Kunal.Chauhan.EmployeeApp.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,7 +26,17 @@ public class EmployeeRestController {
 
     @GetMapping("/employees/{id}")
     public Employee getEmployee(@PathVariable int id){
-        return employeeService.getEmployeeByUd(id);
+        Employee employee = employeeService.getEmployeeByUd(id);
+        if(employee == null){
+            throw new EmployeeNotExecption("The Employee is not Found " + id);
+        }
+        return employee;
+    }
+
+    @PostMapping("/employees")
+    public Employee addEmployee(@RequestBody Employee theEmployee){
+        Employee employee = employeeService.SaveEmployee(theEmployee);
+        return employee;
     }
 
 }
