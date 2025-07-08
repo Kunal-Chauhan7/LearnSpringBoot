@@ -1,7 +1,8 @@
 package com.Kunal.Chauhan.EmployeeApp.restController;
 
-import com.Kunal.Chauhan.EmployeeApp.dao.EmployeeDAO;
 import com.Kunal.Chauhan.EmployeeApp.entity.Employee;
+import com.Kunal.Chauhan.EmployeeApp.service.EmployeeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,15 +13,16 @@ import java.util.List;
 @RequestMapping("/api")
 
 public class EmployeeRestController {
-    private EmployeeDAO employeeDAO;
+    private EmployeeService employeeService;
 
-    public EmployeeRestController(EmployeeDAO employeeDAO){ // injecting the bean in this constructor
-        this.employeeDAO = employeeDAO;
+    @Autowired
+    public EmployeeRestController(EmployeeService employeeService){ // injecting the bean in this constructor
+        this.employeeService = employeeService;
     }
 
     @GetMapping("/employees")
     public List<Employee> getAllEmployees(){
-        return employeeDAO.getAllEmployees();
+        return employeeService.getAllEmployee();
     }
 
 }
