@@ -3,5 +3,6 @@ package com.Kunal.Chauhan.EmployeeApp.dao;
 import com.Kunal.Chauhan.EmployeeApp.entity.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface EmployeeSampleDAO extends JpaRepository<Employee , Integer> {
+public interface EmployeeRepository extends JpaRepository<Employee,Integer> {
+    // No need to write to any code
 }
