@@ -63,6 +63,54 @@ package com.luv2code.springboot.cruddemo.security;
 //                                                 Making security using DB
 //                                                 No more hardCoded User
 
+//import org.springframework.context.annotation.Bean;
+//import org.springframework.context.annotation.Configuration;
+//import org.springframework.http.HttpMethod;
+//import org.springframework.security.config.Customizer;
+//import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+//import org.springframework.security.provisioning.JdbcUserDetailsManager;
+//import org.springframework.security.provisioning.UserDetailsManager;
+//import org.springframework.security.web.SecurityFilterChain;
+//
+//import javax.sql.DataSource;
+//
+//@Configuration
+//public class DemoSecurityConfig {
+//    @Bean
+//    public UserDetailsManager userDetailsManager(DataSource dataSource){
+//        return new JdbcUserDetailsManager(dataSource); // making a new user detail manager from the data source
+//    }
+//
+//    @Bean
+//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
+//        http.authorizeHttpRequests(configuer ->
+//                configuer
+//                        .requestMatchers(HttpMethod.GET,"/api/employees").hasRole("EMPLOYEE")
+//                        //                                         /api/employees/{EmployeeId}
+//                        .requestMatchers(HttpMethod.GET,"/api/employees/**").hasRole("EMPLOYEE")
+//                        .requestMatchers(HttpMethod.POST,"/api/employees").hasRole("MANAGER")
+//                        .requestMatchers(HttpMethod.PUT,"/api/employees").hasRole("MANAGER")
+//                        .requestMatchers(HttpMethod.PATCH,"/api/employees/**").hasRole("MANAGER")
+//                        //                                            /api/employees/{EmployeeId}
+//                        .requestMatchers(HttpMethod.DELETE,"/api/employees/**").hasRole("ADMIN")
+//        );
+//
+//        // use HTTP Basic authentication
+//        http.httpBasic(Customizer.withDefaults());
+//
+//        http.csrf(csrf->csrf.disable());
+//
+//        return http.build();
+//
+//    }
+//
+//}
+
+
+//                                                 Making security using DB
+//                                                 No more hardCoded User
+//                                                 Now using custom tables for Spring Security
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -78,7 +126,25 @@ import javax.sql.DataSource;
 public class DemoSecurityConfig {
     @Bean
     public UserDetailsManager userDetailsManager(DataSource dataSource){
-        return new JdbcUserDetailsManager(dataSource); // making a new user detail manager from the data source
+
+
+        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
+
+
+        // define the query to retrieve user by username
+        jdbcUserDetailsManager.setUsersByUsernameQuery(
+                "SELECT user_id, pw, active FROM members WHERE user_id=?" // ? will be passed from the login in form
+        );
+
+        // define the query to role/authorise by username
+        jdbcUserDetailsManager.setAuthoritiesByUsernameQuery(
+                "SELECT user_id, role FROM roles WHERE user_id=?"
+        );
+
+
+        return jdbcUserDetailsManager; // making a new user detail manager from the data source
+
+
     }
 
     @Bean
