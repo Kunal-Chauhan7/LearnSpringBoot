@@ -19,6 +19,11 @@
           th:errors="*{lastName}"
           class="error"></span>
     <br><br>
+    Enter pass(*) : <input type="text" th:field="*{pass}"/>
+    <span th:if="${#fields.hasErrors('pass')}"
+          th:errors="*{pass}"
+          class="error"></span>
+    <br><br>
     <input type="submit" value="submit"/>
 </form>
 
