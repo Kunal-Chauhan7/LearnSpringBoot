@@ -1,5 +1,6 @@
 package com.customer.thymleafDemo.Customer.thymleafApp.Model;
 
+import com.customer.thymleafDemo.Customer.thymleafApp.validation.CourseCode;
 import jakarta.validation.constraints.*;
 
 public class Customer {
@@ -17,6 +18,17 @@ public class Customer {
 
     @Pattern(regexp = "^[a-zA-Z0-9]{5}" , message = "only 5 char/digits")
     private String postalCode;
+
+    @CourseCode
+    private String courseCode;
+
+    public String getCourseCode() {
+        return courseCode;
+    }
+
+    public void setCourseCode(String courseCode) {
+        this.courseCode = courseCode;
+    }
 
     public String getPostalCode() {
         return postalCode;
