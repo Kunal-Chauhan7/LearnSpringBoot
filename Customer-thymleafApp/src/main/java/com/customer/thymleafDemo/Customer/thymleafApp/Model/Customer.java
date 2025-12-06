@@ -19,6 +19,7 @@ public class Customer {
     @Pattern(regexp = "^[a-zA-Z0-9]{5}" , message = "only 5 char/digits")
     private String postalCode;
 
+//    @CourseCode(value = "Any value you want to check", message = "the message you want to display")
     @CourseCode
     private String courseCode;
 

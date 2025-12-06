@@ -15,6 +15,8 @@ public class CourseCodeConstrativeValidator implements ConstraintValidator<Cours
 
     @Override
     public boolean isValid(String courseCode, ConstraintValidatorContext constraintValidatorContext) { // the courseCode is the value we will get from the html form
-        return courseCode.startsWith(coursePrefix);
+        if(courseCode!=null)
+            return courseCode.startsWith(coursePrefix);
+        return false;
     }
 }
