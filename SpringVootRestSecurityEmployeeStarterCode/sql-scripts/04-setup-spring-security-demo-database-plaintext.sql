@@ -40,7 +40,7 @@ CREATE TABLE `authorities` (
 -- Inserting data for table `authorities`
 --
 
-INSERT INTO `authorities` 
+authoritiesauthoritiesINSERT INTO `authorities` 
 VALUES 
 ('john','ROLE_EMPLOYEE'),
 ('mary','ROLE_EMPLOYEE'),
